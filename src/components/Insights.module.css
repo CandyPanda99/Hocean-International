@@ -1,0 +1,234 @@
+.section {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--color-background);
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(22, 70, 122, 0.03) 0%, transparent 100%);
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xxl);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.headerImage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.headerImage::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(200, 51, 41, 0.1) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(22, 70, 122, 0.15));
+}
+
+.subtitle {
+  display: inline-block;
+  font-family: var(--font-family-heading);
+  font-weight: 800;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.title {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-secondary);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--color-text-main);
+  margin-bottom: var(--spacing-lg);
+  text-align: justify;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2.25rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  border-radius: var(--border-radius-full);
+  font-weight: 600;
+  font-family: var(--font-family-heading);
+  letter-spacing: 0.5px;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 15px rgba(22, 70, 122, 0.2);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: #fff;
+}
+
+.insightsHeader {
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background: var(--color-background);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  border: 1px solid rgba(22, 70, 122, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(22, 70, 122, 0.2);
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.cardImage {
+  transition: transform var(--transition-slow);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.08);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(22, 70, 122, 0.6) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.card:hover .imageOverlay {
+  opacity: 1;
+}
+
+.cardContent {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--color-background);
+}
+
+.cardTitle {
+  font-size: 1.35rem;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+  color: var(--color-secondary);
+  transition: color var(--transition-fast);
+  font-weight: 700;
+}
+
+.card:hover .cardTitle {
+  color: var(--color-primary);
+}
+
+.cardExcerpt {
+  color: var(--color-text-main);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-md);
+  flex: 1;
+}
+
+.readMore {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  font-family: var(--font-family-heading);
+  transition: gap var(--transition-fast);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.card:hover .readMore {
+  gap: 0.75rem;
+}
