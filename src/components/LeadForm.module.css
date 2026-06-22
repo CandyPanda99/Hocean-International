@@ -20,7 +20,7 @@
 }
 
 .formWrapper {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: var(--spacing-xl);
@@ -28,7 +28,7 @@
   box-shadow: var(--shadow-lg);
   width: 100%;
   max-width: 850px;
-  border: 1px solid rgba(22, 70, 122, 0.08);
+  border: 1px solid var(--glass-border);
   position: relative;
   overflow: hidden;
 }
@@ -91,7 +91,7 @@
 .inputGroup input,
 .inputGroup select {
   padding: 0.85rem 1.2rem;
-  border: 1px solid rgba(22, 70, 122, 0.15);
+  border: 1px solid var(--glass-border-hover);
   border-radius: var(--border-radius-md);
   background-color: var(--color-background);
   color: var(--color-text-main);

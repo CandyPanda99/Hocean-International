@@ -43,8 +43,8 @@
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(22, 70, 122, 0.05);
-  background: white;
+  border: 1px solid var(--glass-border);
+  background: var(--color-background);
   padding: var(--spacing-sm);
 }
 
@@ -53,11 +53,11 @@
   flex-direction: column;
   gap: var(--spacing-md);
   padding: var(--spacing-md);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: var(--border-radius-lg);
-  border: 1px solid rgba(22, 70, 122, 0.05);
+  border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-sm);
 }
 
@@ -76,6 +76,6 @@
   overflow: hidden;
   margin-top: var(--spacing-sm);
   box-shadow: var(--shadow-sm);
-  background: white;
+  background: var(--color-background);
   padding: var(--spacing-xs);
 }

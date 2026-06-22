@@ -10,19 +10,12 @@
 }
 
 .scrolled {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 0.5rem 0;
   box-shadow: var(--shadow-sm);
-  border-bottom: 1px solid rgba(22, 70, 122, 0.05);
-}
-
-@media (prefers-color-scheme: dark) {
-  .scrolled {
-    background-color: rgba(10, 22, 36, 0.85);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .container {

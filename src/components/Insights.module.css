@@ -10,7 +10,7 @@
   left: 0;
   right: 0;
   height: 60%;
-  background: linear-gradient(180deg, rgba(22, 70, 122, 0.03) 0%, transparent 100%);
+  background: var(--section-gradient);
   z-index: 0;
 }
 
@@ -53,7 +53,7 @@
   transform: translate(-50%, -50%);
   width: 80%;
   height: 80%;
-  background: radial-gradient(circle, rgba(200, 51, 41, 0.1) 0%, transparent 70%);
+  background: var(--section-gradient-accent);
   z-index: -1;
   filter: blur(20px);
 }
@@ -143,7 +143,7 @@
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-normal);
-  border: 1px solid rgba(22, 70, 122, 0.08);
+  border: 1px solid var(--glass-border);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -152,7 +152,7 @@
 .card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(22, 70, 122, 0.2);
+  border-color: var(--glass-border-hover);
 }
 
 .cardLink {
