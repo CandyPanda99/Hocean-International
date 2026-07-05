@@ -31,6 +31,7 @@
   justify-content: center;
   width: 45px;
   height: 45px;
+  flex-shrink: 0;
   background: linear-gradient(135deg, rgba(22, 70, 122, 0.1), rgba(200, 51, 41, 0.05));
   border-radius: 50%;
   color: var(--color-primary);
@@ -56,7 +57,7 @@
 @media (min-width: 768px) {
   .list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-sm);
   }
 }

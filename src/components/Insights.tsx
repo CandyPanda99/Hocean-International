@@ -49,10 +49,10 @@ export default function Insights() {
           variants={headerVariants}
         >
           <div className={styles.headerContent}>
-            <span className={styles.subtitle}>HOCEAN INSIGHT</span>
-            <h2 className={styles.title}>Discover Hocean International’s Tailored Logistics Solutions for Temperature-sensitive Products</h2>
+            <span className={styles.subtitle}>WORLDWIDE COVERAGE</span>
+            <h2 className={styles.title}>Delivering Critical Samples Worldwide</h2>
             <p className={styles.description}>
-              Personalisation and customisation have become key components for businesses to boost revenue. Amidst the growing number of logistics service providers available, consumers are looking for logistics solutions that can not only address their needs, but define the processes in detail. At Hocean, our Experts offer Customer-oriented Procedures (COP) to enhance client supply chain mobility.
+              Through our partnership with DHL’s global logistics network, we provide fast and dependable shipping services to destinations across the globe. Whether your samples need to reach a neighboring country or a remote international laboratory, we ensure seamless transportation from collection to delivery.
             </p>
             <a href="#contact-sec" className={styles.button}>
               Speak to Us

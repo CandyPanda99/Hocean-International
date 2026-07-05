@@ -45,9 +45,20 @@ export default function BioLogistics() {
           </motion.div>
           
           <motion.div className={styles.contentColumn} variants={textVariants}>
+            <h2 className={styles.title} style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--color-secondary)', fontWeight: 'bold' }}>Safe, Reliable & Temperature-Controlled Logistics</h2>
             <p className={styles.text}>
-              Hocean International offers optimal and customised bio-logistics solutions that support pre-clinical to phase III of the process life cycle. We commit to handling high value products towards the advancement of biopharma breakthroughs. Our solutions are provided under various temperature ranges, from cryogenic, dry ice, controlled-frozen, refrigerated, to controlled room temperature – our data monitoring and validated packaging solutions assist with maintaining product integrity.
+              We specialize in the international transportation of biological and diagnostic samples using validated dry ice packaging and trusted global courier networks. Our team ensures that temperature-sensitive specimens are handled with precision and delivered safely to laboratories, research facilities, hospitals, and healthcare institutions worldwide.
             </p>
+            <h3 style={{ fontSize: '1.25rem', marginTop: '1.5rem', marginBottom: '0.75rem', color: 'var(--color-secondary)', fontWeight: '600' }}>Industries We Serve</h3>
+            <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginBottom: '1.5rem', color: 'var(--color-text-main)', lineHeight: '1.6' }}>
+              <li>Medical Laboratories</li>
+              <li>Hospitals & Healthcare Providers</li>
+              <li>Research Institutions</li>
+              <li>Biotechnology Companies</li>
+              <li>Pharmaceutical Organizations</li>
+              <li>Universities & Academic Research Centers</li>
+              <li>Clinical Trial Organizations</li>
+            </ul>
             <div className={styles.secondImageWrapper}>
               <Image 
                 src="https://wordpress-1400653-5323841.cloudwaysapps.com/wp-content/uploads/2025/03/Asset-1.png" 

@@ -26,7 +26,7 @@
 }
 
 .content {
-  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -46,7 +46,6 @@
   color: var(--color-text-main);
   margin-bottom: var(--spacing-xl);
   text-align: center;
-  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -97,7 +96,6 @@
   font-size: 1.1rem;
   color: var(--color-text-muted);
   text-align: center;
-  max-width: 800px;
   margin: 0 auto;
 }
 

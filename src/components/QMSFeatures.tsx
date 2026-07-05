@@ -1,24 +1,34 @@
 'use client';
 import { motion } from 'framer-motion';
-import { ShieldCheck, PackageSearch, FileCheck2 } from 'lucide-react';
+import { ShieldCheck, Snowflake, Globe, Plane, Users } from 'lucide-react';
 import styles from './QMSFeatures.module.css';
 
 export default function QMSFeatures() {
   const features = [
     {
-      title: "Professional & Qualified Couriers",
-      description: "Hocean International leverages our global courier network. Through an annual training matrix, our Experts ensure a highly trained and responsive network. Personnel are equipped to handle customs documentation and communicate proactively for seamless deliveries.",
+      title: "Temperature Integrity",
+      description: "We use high-quality dry ice packaging solutions designed to maintain required temperatures throughout transit, helping preserve sample integrity from origin to destination.",
+      icon: Snowflake
+    },
+    {
+      title: "Global Reach",
+      description: "Ship confidently to virtually any destination worldwide through DHL’s extensive international network.",
+      icon: Globe
+    },
+    {
+      title: "Regulatory Compliance",
+      description: "Our team follows industry best practices and shipping requirements for biological materials, ensuring documentation and handling procedures meet applicable regulations.",
       icon: ShieldCheck
     },
     {
-      title: "Validated Packaging & Equipment",
-      description: "Our Industry Experts procure packaging and temperature-controlled equipment that maintains product integrity throughout shipment transit. Our NIST-accredited data loggers and IATA-certified pacakaging and dry shippers enhance temperature regulation and ensure product viability.",
-      icon: PackageSearch
+      title: "Fast & Secure Delivery",
+      description: "Time-sensitive shipments receive priority handling to minimize transit times and maintain sample quality.",
+      icon: Plane
     },
     {
-      title: "Accredited Standard Operating Procedures",
-      description: "Hocean’s commitment to sustainable and high quality logistics services rely on meeting market standard practices when handling various products. Our Regional Industry Experts and QA Team enhance our procedures leveraging local-know how and shifting trends.",
-      icon: FileCheck2
+      title: "Professional Support",
+      description: "From shipment preparation to final delivery, our logistics specialists are available to assist with every stage of the process.",
+      icon: Users
     }
   ];
 
@@ -45,7 +55,7 @@ export default function QMSFeatures() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          Make it Happen with Hocean’s Global Quality Management System (QMS)
+          Why Choose Us?
         </motion.h2>
 
         <motion.div 

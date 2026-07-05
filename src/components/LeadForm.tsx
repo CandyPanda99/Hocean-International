@@ -37,8 +37,8 @@ export default function LeadForm() {
     <section id="contact-sec" className={styles.section}>
       <div className={`container ${styles.container}`}>
         <div className={styles.formWrapper}>
-          <h3 className={styles.title}>Speak to our Industry Experts</h3>
-          <p className={styles.subtitle}>Fill the form below to submit your enquiry.</p>
+          <h3 className={styles.title}>Request a Quote</h3>
+          <p className={styles.subtitle}>Need to ship biological samples internationally?<br/>Contact our team today for a customized shipping solution. We will help you select the most efficient and compliant transportation method for your shipment requirements.</p>
           
           <form className={styles.form} onSubmit={handleSubmit} id="landing2-custom-salesfoce-form">
             <input type="hidden" name="oid" value="00D8b000000aRik" />
