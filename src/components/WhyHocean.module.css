@@ -1,0 +1,150 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.heading {
+  margin-bottom: var(--spacing-md);
+}
+
+.reasons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reasons li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--glass-border-hover);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--color-text-main);
+}
+
+.reasons li:last-child {
+  border-bottom: 1px solid var(--glass-border-hover);
+}
+
+.reasonIcon {
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+  color: var(--color-accent-text);
+}
+
+.photoPanel {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.photo {
+  object-fit: cover;
+  transition: scale var(--transition-slow);
+}
+
+.photoPanel:hover .photo {
+  scale: 1.04;
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 42, 74, 0) 35%, rgba(10, 25, 47, 0.85) 100%);
+}
+
+.badge {
+  position: absolute;
+  left: var(--spacing-sm);
+  right: var(--spacing-sm);
+  bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.35rem;
+  border-radius: var(--border-radius-md);
+  background: rgba(10, 25, 47, 0.55);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.badgeMark {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  stroke: var(--color-accent-light);
+}
+
+.badgeTitle {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.badgeSub {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-family-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.network {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.card {
+  padding: 1.75rem;
+}
+
+.cardTitle {
+  margin: 1.1rem 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+.cardDescription {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--color-text-main);
+}
+
+@media (min-width: 640px) {
+  .network {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .photoPanel {
+    min-height: 520px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .network {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

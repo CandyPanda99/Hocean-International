@@ -1,0 +1,212 @@
+.section {
+  overflow: hidden;
+  background-color: var(--color-primary-dark);
+  color: #fff;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.backgroundImage {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.55;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 10%, rgba(200, 51, 41, 0.18) 0%, transparent 45%), var(--band-overlay);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Pack diagram */
+.packDiagram {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  background: var(--band-glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--band-border);
+}
+
+.packStageWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.packArrow {
+  display: flex;
+  color: var(--color-accent-light);
+  rotate: 90deg;
+}
+
+.packStage {
+  text-align: center;
+}
+
+.packIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 1rem;
+  border-radius: 22px;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(42, 107, 174, 0.55), rgba(22, 70, 122, 0.25));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.packTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.packDetail {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--band-text);
+}
+
+.marks {
+  /* Render the marks as a white shipping sticker in both themes */
+  --color-background: #fff;
+  --color-secondary: #0a192f;
+  --color-text-muted: #64748b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--border-radius-md);
+  background: #fff;
+}
+
+/* Steps */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.steps li {
+  display: flex;
+}
+
+.step {
+  position: relative;
+  flex: 1;
+  padding: 1.75rem;
+  border-radius: var(--border-radius-lg);
+  background: var(--band-glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--band-border);
+  transition: translate var(--transition-normal), background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.step:hover {
+  translate: 0 -6px;
+  background-color: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.stepHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-bottom: 1.1rem;
+}
+
+.stepNumber {
+  font-family: var(--font-family-heading);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff 0%, var(--color-accent-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stepStage {
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--band-border);
+  font-family: var(--font-family-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--band-text);
+}
+
+.stepTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: #fff;
+}
+
+.stepDescription {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: var(--band-text);
+}
+
+@media (min-width: 768px) {
+  .packDiagram {
+    grid-template-columns: repeat(3, 1fr);
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .packStageWrap {
+    position: relative;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .packArrow {
+    position: absolute;
+    left: calc(var(--spacing-md) / -2);
+    top: 38px;
+    translate: -50% -50%;
+    rotate: 0deg;
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+}

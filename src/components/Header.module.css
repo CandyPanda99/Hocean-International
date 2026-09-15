@@ -5,23 +5,42 @@
   width: 100%;
   z-index: 1000;
   padding: var(--spacing-sm) 0;
-  transition: all var(--transition-normal);
+  transition: padding var(--transition-normal);
   background-color: transparent;
 }
 
-.scrolled {
+/*
+ * The glass background lives on a pseudo-element: a backdrop-filter on the header itself
+ * would become the containing block for the fixed mobile menu and clip it to header height.
+ */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background-color: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  padding: 0.5rem 0;
   box-shadow: var(--shadow-sm);
   border-bottom: 1px solid var(--glass-border);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+}
+
+.scrolled {
+  padding: 0.5rem 0;
+}
+
+.scrolled::before {
+  opacity: 1;
 }
 
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-md);
 }
 
 .logoContainer {
@@ -41,9 +60,14 @@
 }
 
 .logoImage {
-  height: 75px;
+  height: 72px;
   width: auto;
   object-fit: contain;
+  transition: height var(--transition-normal);
+}
+
+.scrolled .logoImage {
+  height: 60px;
 }
 
 .nav {
@@ -53,7 +77,7 @@
 .navList {
   display: flex;
   list-style: none;
-  gap: var(--spacing-md);
+  gap: 1.75rem;
   margin: 0;
   padding: 0;
 }
@@ -61,10 +85,11 @@
 .navList a {
   font-family: var(--font-family-heading);
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--color-text-main);
   position: relative;
   padding: 0.5rem 0;
+  white-space: nowrap;
 }
 
 .navList a::after {
@@ -80,7 +105,7 @@
 }
 
 .navList a:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 
 .navList a:hover::after {
@@ -105,6 +130,7 @@
   font-weight: 600;
   font-family: var(--font-family-heading);
   letter-spacing: 0.5px;
+  white-space: nowrap;
   transition: all var(--transition-normal);
   box-shadow: 0 4px 15px rgba(200, 51, 41, 0.2);
 }
@@ -123,58 +149,59 @@
   padding: 0.5rem;
 }
 
-/* Mobile Responsive */
-@media (max-width: 900px) {
-  .logoImage {
-    height: 50px;
+/* Mobile / tablet - six links need the full row, so collapse earlier than the page grid */
+@media (max-width: 1080px) {
+  .logoImage,
+  .scrolled .logoImage {
+    height: 52px;
   }
-  
+
   .mobileMenuBtn {
     display: flex;
   }
-  
+
   .nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--color-background);
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transform: translateY(-100%);
-    transition: transform var(--transition-normal);
+    transition: transform var(--transition-normal), opacity var(--transition-normal), visibility var(--transition-normal);
     opacity: 0;
     visibility: hidden;
   }
-  
+
   .navOpen {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
-  
+
   .navList {
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
   }
-  
+
   .navList a {
     font-size: 1.5rem;
   }
-  
+
   .button {
-    display: none; /* Often hidden on mobile header, or moved to menu */
+    display: none;
   }
-  
+
   .navOpen + .actions .button {
     display: flex;
     position: fixed;
     bottom: var(--spacing-lg);
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
+    width: min(80%, 360px);
   }
 }

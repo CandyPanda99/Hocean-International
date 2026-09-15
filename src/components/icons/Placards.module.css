@@ -1,0 +1,22 @@
+.placard {
+  display: block;
+  flex-shrink: 0;
+  font-family: var(--font-family-mono);
+}
+
+.fill {
+  fill: var(--color-background);
+}
+
+.ink {
+  fill: var(--color-secondary);
+}
+
+.muted {
+  fill: var(--color-text-muted);
+}
+
+.outline {
+  fill: none;
+  stroke: var(--color-secondary);
+}

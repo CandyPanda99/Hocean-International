@@ -1,7 +1,7 @@
 .heroSection {
   position: relative;
   min-height: 100vh;
-  padding: calc(var(--spacing-xxl) + 40px) 0 var(--spacing-xl) 0;
+  padding: calc(var(--spacing-xxl) + 20px) 0 var(--spacing-lg) 0;
   display: flex;
   align-items: center;
   background-color: var(--color-background);
@@ -10,102 +10,137 @@
 
 .background {
   position: absolute;
-  top: 0;
+  inset: 0;
+  z-index: 0;
+}
+
+.backgroundImage {
+  object-fit: cover;
+  object-position: 70% 30%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 0%, rgba(22, 70, 122, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 10% 90%, rgba(200, 51, 41, 0.06) 0%, transparent 40%),
+              var(--hero-overlay);
+}
+
+.overlay::after {
+  content: '';
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 80% 0%, rgba(22, 70, 122, 0.05) 0%, transparent 50%),
-              radial-gradient(circle at 10% 90%, rgba(200, 51, 41, 0.05) 0%, transparent 40%),
-              var(--hero-gradient);
-  z-index: 0;
+  height: 35%;
+  background: linear-gradient(180deg, transparent 0%, var(--color-background) 100%);
 }
 
 .container {
   position: relative;
   z-index: 1;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
 }
 
 .content {
-  width: 100%;
-  margin: 0 auto;
+  min-width: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 var(--spacing-md);
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--border-radius-full);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border-hover);
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(200, 51, 41, 0.45); }
+  70% { box-shadow: 0 0 0 10px rgba(200, 51, 41, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(200, 51, 41, 0); }
 }
 
 .title {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
-  line-height: 1.1;
+  line-height: 1.08;
   margin-bottom: var(--spacing-md);
   color: var(--color-secondary);
-  text-align: center;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
 
+.temp {
+  white-space: nowrap;
+}
+
 .description {
+  max-width: 54ch;
+  margin: 0 0 var(--spacing-md);
   font-size: 1.15rem;
   line-height: 1.8;
   color: var(--color-text-main);
-  margin-bottom: var(--spacing-xl);
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.subtitle {
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  line-height: 1.3;
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-secondary);
-  text-align: center;
-  font-weight: 700;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
 }
 
-.servicesIntro {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: var(--spacing-lg) var(--spacing-lg);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
-  margin-bottom: var(--spacing-xl);
-  margin-top: var(--spacing-md);
-  border: 1px solid var(--glass-border);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+.strip {
+  margin-top: var(--spacing-lg);
 }
 
-.servicesIntro:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--spacing-xl);
+  }
 }
 
-.servicesIntro p {
-  font-size: 1.1rem;
-  color: var(--color-text-muted);
-  margin-bottom: var(--spacing-md);
-  text-align: center;
+/* Text sits over the whole photo once columns stack, so soften the image */
+@media (max-width: 1023px) {
+  .backgroundImage {
+    opacity: 0.35;
+  }
 }
 
-.bottomSubtitle {
-  font-size: 1.5rem;
-  line-height: 1.4;
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-text-main);
-  text-align: center;
-}
-
-.bottomDesc {
-  font-size: 1.1rem;
-  color: var(--color-text-muted);
-  text-align: center;
-  margin: 0 auto;
-}
-
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .heroSection {
+    min-height: auto;
     padding-top: calc(var(--spacing-lg) + 80px);
+    padding-bottom: var(--spacing-lg);
   }
-  
-  .servicesIntro {
-    padding: var(--spacing-md);
+
+  .eyebrow {
+    font-size: 0.68rem;
   }
 }

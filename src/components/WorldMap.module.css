@@ -1,0 +1,441 @@
+.figure {
+  /* Sequential zone ramp (one hue, light → dark = closest → most distant), validated for lightness order */
+  --zone-1: #9DC1EE;
+  --zone-2: #8AAEDD;
+  --zone-3: #769CCC;
+  --zone-4: #638ABB;
+  --zone-5: #5178AA;
+  --zone-6: #3E679A;
+  --zone-7: #2C5689;
+  --zone-8: #194579;
+  --zone-9: #033469;
+  --map-land: #DADEE5;
+  --map-border: #FCFDFE;
+  --map-graticule: #D5DDE7;
+  --map-route: var(--color-accent);
+  --map-network: #0a192f;
+  --map-halo: #FCFDFE;
+
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .figure {
+    /* Anchor flips in dark mode: the most distant zone is the brightest */
+    --zone-1: #30517B;
+    --zone-2: #3D5E88;
+    --zone-3: #4A6B96;
+    --zone-4: #5879A4;
+    --zone-5: #6687B1;
+    --zone-6: #7495C0;
+    --zone-7: #82A3CE;
+    --zone-8: #91B2DC;
+    --zone-9: #A0C0EB;
+    --map-land: #2A3139;
+    --map-border: #111C2A;
+    --map-graticule: #1C2735;
+    --map-route: #EF6A60;
+    --map-network: #F8FAFC;
+    --map-halo: #111C2A;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  font-family: var(--font-family-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.pulseDot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--map-route);
+  animation: dotPulse 2.4s ease-out infinite;
+}
+
+@keyframes dotPulse {
+  0% { box-shadow: 0 0 0 0 rgba(200, 51, 41, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(200, 51, 41, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(200, 51, 41, 0); }
+}
+
+.canvas {
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+}
+
+.hoverFrame {
+  position: relative;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden; /* clips the graticule to the map frame */
+}
+
+.graticule {
+  fill: none;
+  stroke: var(--map-graticule);
+  stroke-width: 0.75;
+  vector-effect: non-scaling-stroke;
+}
+
+.land {
+  fill: var(--map-land);
+  stroke: var(--map-border);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transition: fill var(--transition-fast), stroke var(--transition-fast);
+}
+
+.land:hover,
+.marker:hover {
+  stroke: var(--color-accent-text);
+  stroke-width: 1.5;
+}
+
+.originLand {
+  fill: var(--map-route);
+}
+
+.marker {
+  stroke: var(--map-border);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Routes */
+.routeHit {
+  fill: transparent;
+  cursor: help;
+}
+
+.routeLine {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.scheduled .routeLine {
+  stroke: var(--map-route);
+  stroke-width: 1.75;
+  opacity: 0.85;
+}
+
+.network .routeLine {
+  stroke: var(--map-network);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.45;
+}
+
+.routeComet {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 8 200;
+  stroke-dashoffset: 8;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  animation: travel 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.scheduled .routeComet {
+  stroke: var(--map-route);
+  stroke-width: 3;
+}
+
+.network .routeComet {
+  stroke: var(--map-network);
+  stroke-width: 2;
+  opacity: 0.6;
+  animation-duration: 4.4s;
+}
+
+@keyframes travel {
+  from { stroke-dashoffset: 8; }
+  to { stroke-dashoffset: -100; }
+}
+
+.routeEnd {
+  fill: var(--map-halo);
+  stroke-width: 1.75;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.scheduled .routeEnd {
+  stroke: var(--map-route);
+}
+
+.network .routeEnd {
+  stroke: var(--map-network);
+  opacity: 0.7;
+}
+
+.scheduled:has(.routeHit:hover) .routeLine {
+  stroke-width: 2.75;
+  opacity: 1;
+}
+
+.network:has(.routeHit:hover) .routeLine {
+  opacity: 0.9;
+}
+
+/* Origin */
+.origin {
+  pointer-events: none;
+}
+
+.originCore {
+  fill: var(--map-route);
+  stroke: var(--map-halo);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.originPulse {
+  fill: var(--map-route);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: originPulse 2.4s ease-out infinite;
+}
+
+@keyframes originPulse {
+  0% { opacity: 0.45; transform: scale(1); }
+  100% { opacity: 0; transform: scale(4); }
+}
+
+.labels text {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: var(--color-secondary);
+  stroke: var(--map-halo);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  pointer-events: none;
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 140px;
+  max-width: 260px;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--border-radius-md);
+  background: rgba(10, 25, 47, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-md);
+  transform: translate(14px, -50%);
+  pointer-events: none;
+}
+
+.tooltipFlip {
+  transform: translate(calc(-100% - 14px), -50%);
+}
+
+.tooltip strong {
+  font-family: var(--font-family-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.tooltip span {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md) 1.25rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.legendGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.legendLabel {
+  padding-top: 0.2rem;
+  font-family: var(--font-family-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.rampWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ramp {
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ramp li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.rampSwatch {
+  display: block;
+  width: 30px;
+  height: 12px;
+}
+
+.ramp li:first-child .rampSwatch {
+  border-radius: 4px 0 0 4px;
+}
+
+.ramp li:last-child .rampSwatch {
+  border-radius: 0 4px 4px 0;
+}
+
+.rampNumber {
+  font-family: var(--font-family-mono);
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+}
+
+.rampEnds {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--color-text-main);
+}
+
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+}
+
+.keys li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.key {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.keyScheduled {
+  width: 22px;
+  height: 0;
+  border-top: 2px solid var(--map-route);
+}
+
+.keyNetwork {
+  width: 22px;
+  height: 0;
+  border-top: 2px dashed var(--map-network);
+  opacity: 0.6;
+}
+
+.keyOrigin {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--map-route);
+}
+
+.keyLand {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--map-land);
+  box-shadow: inset 0 0 0 1px var(--glass-border-hover);
+}
+
+@media (max-width: 900px) {
+  .labels {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.64rem;
+  }
+
+  .canvas {
+    padding: 1rem 0.75rem 0.5rem;
+  }
+
+  .marker {
+    r: 7px;
+  }
+
+  .legend {
+    padding: 1rem 1.1rem 1.1rem;
+  }
+
+  .legendGroup {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .rampSwatch {
+    width: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeComet,
+  .originPulse {
+    display: none;
+  }
+}

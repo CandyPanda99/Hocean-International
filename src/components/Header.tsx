@@ -5,6 +5,15 @@ import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 
+const navLinks = [
+  { href: '#services', label: 'Services' },
+  { href: '#temperature', label: 'Temperature' },
+  { href: '#packaging', label: 'Packaging' },
+  { href: '#process', label: 'Process' },
+  { href: '#destinations', label: 'Destinations' },
+  { href: '#flights', label: 'Flights' },
+];
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,43 +22,66 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
         <div className={styles.logoContainer}>
-          <Link href="/" className={styles.logoLink}>
-            <Image 
-              src="/Logo.png" 
-              alt="Hocean International Logo" 
-              width={300} 
-              height={85} 
+          <Link href="/" className={styles.logoLink} onClick={closeMenu}>
+            <Image
+              src="/Logo.png"
+              alt="Hocean International Logo"
+              width={150}
+              height={100}
               priority
               className={styles.logoImage}
             />
           </Link>
         </div>
 
-        <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.navOpen : ''}`}>
+        <nav
+          id="primary-navigation"
+          aria-label="Primary"
+          className={`${styles.nav} ${isMobileMenuOpen ? styles.navOpen : ''}`}
+        >
           <ul className={styles.navList}>
-            <li><a href="#home-sec" onClick={() => setIsMobileMenuOpen(false)}>Home</a></li>
-            <li><a href="#about-sec" onClick={() => setIsMobileMenuOpen(false)}>About Hocean</a></li>
-            <li><a href="#insight-sec" onClick={() => setIsMobileMenuOpen(false)}>Insights</a></li>
-            <li><a href="#case-studies" onClick={() => setIsMobileMenuOpen(false)}>Case Studies</a></li>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} onClick={closeMenu}>{link.label}</a>
+              </li>
+            ))}
           </ul>
         </nav>
 
         <div className={styles.actions}>
-          <a href="#contact-sec" className={styles.button}>
-            Speak with Us
+          <a href="#contact" className={styles.button} onClick={closeMenu}>
+            Request Shipment
           </a>
-          <button 
+          <button
             className={styles.mobileMenuBtn}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="primary-navigation"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

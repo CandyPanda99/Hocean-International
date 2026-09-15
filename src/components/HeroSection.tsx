@@ -1,62 +1,69 @@
-'use client';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
+import heroImage from '@/assets/images/hero-cryo-rack.jpg';
+import Reveal from './ui/Reveal';
+import WaybillCard from './WaybillCard';
+import CredentialStrip from './CredentialStrip';
 import styles from './HeroSection.module.css';
-import ServicesList from './ServicesList';
 
 export default function HeroSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6 }
-    }
-  };
-
   return (
-    <section id="home-sec" className={styles.heroSection}>
-      <div className={styles.background}></div>
+    <section id="home" className={styles.heroSection}>
+      <div className={styles.background} aria-hidden="true">
+        <Image
+          src={heroImage}
+          alt=""
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          className={styles.backgroundImage}
+        />
+        <div className={styles.overlay}></div>
+      </div>
+
       <div className={`container ${styles.container}`}>
-        <motion.div 
-          className={styles.content}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.h1 variants={itemVariants} className={styles.title}>
-            Global <span className="gradient-text">Biological Sample Shipping</span>
-          </motion.h1>
-          
-          <motion.p variants={itemVariants} className={styles.description}>
-            Reliable dry ice shipping solutions for biological, clinical, and research samples worldwide. Leveraging DHL’s international network, we ensure temperature-controlled transportation with speed, compliance, and peace of mind.
-          </motion.p>
+        <div className={styles.grid}>
+          <div className={styles.content}>
+            <Reveal>
+              <p className={styles.eyebrow}>
+                <span className={styles.dot} aria-hidden="true"></span>
+                Sri Lanka&apos;s only authorized biological courier
+              </p>
+            </Reveal>
 
-          <motion.h2 variants={itemVariants} className={styles.subtitle}>
-            Temperature-Controlled Shipping Without Compromise
-          </motion.h2>
+            <Reveal delay={0.1}>
+              <h1 className={styles.title}>
+                Biological samples, held at <span className={`gradient-text ${styles.temp}`}>−78°C</span>, from
+                Colombo to the world.
+              </h1>
+            </Reveal>
 
-          <motion.div variants={itemVariants} className={styles.servicesIntro}>
-            <p>Your Partner in International Sample Transportation, providing the following services:</p>
-            <ServicesList />
-          </motion.div>
+            <Reveal delay={0.2}>
+              <p className={styles.description}>
+                Hocean International moves biological substances to overseas universities, hospitals, and
+                laboratories on a verified dry ice cold chain — as Sri Lanka&apos;s authorized DHL Medical Express
+                account holder.
+              </p>
+            </Reveal>
 
-          <motion.h3 variants={itemVariants} className={styles.bottomSubtitle}>
-            Our Commitment
-          </motion.h3>
-          <motion.p variants={itemVariants} className={styles.bottomDesc}>
-            We understand that every sample is valuable. Whether supporting medical diagnosis, scientific research, or pharmaceutical development, we are committed to providing secure, reliable, and temperature-controlled logistics solutions that help your critical shipments reach their destination safely and on time.
-          </motion.p>
-        </motion.div>
+            <Reveal delay={0.3} className={styles.actions}>
+              <a href="#contact" className="btn btn-accent">
+                Request a Shipment
+              </a>
+              <a href="#process" className="btn btn-outline">
+                See the Cold Chain
+              </a>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.25} y={32}>
+            <WaybillCard />
+          </Reveal>
+        </div>
+
+        <Reveal delay={0.4} className={styles.strip}>
+          <CredentialStrip />
+        </Reveal>
       </div>
     </section>
   );
